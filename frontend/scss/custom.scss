@@ -1,0 +1,43 @@
+$navbar-blue: #8ab2f2;
+
+.login-form {
+    margin-top: 50px;
+}
+
+.navbar {
+    margin: 0px;
+    margin-bottom: 10px;
+    padding: 0px;
+    text-align: center;
+
+    .navbar-item-col {
+        padding: 10px;
+        background: #ddd;
+        border-bottom: 5px solid white;
+
+        .navbar-item-link {
+            color: #aaa;
+            font-weight: bold;
+
+            &.disabled-link {
+                pointer-events: none
+            }
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+
+        &.active {
+            border-bottom: 5px solid $navbar-blue;
+            background: #eee;
+
+            .navbar-item-link {
+                color: $navbar-blue;
+            }
+
+        }
+
+    }
+
+}

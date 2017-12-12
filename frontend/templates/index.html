@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="ie6" <% if(htmlWebpackPlugin.files.manifest) { %> manifest="<%= htmlWebpackPlugin.files.manifest %>"<% } %>> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie7" <% if(htmlWebpackPlugin.files.manifest) { %> manifest="<%= htmlWebpackPlugin.files.manifest %>"<% } %>> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie8" <% if(htmlWebpackPlugin.files.manifest) { %> manifest="<%= htmlWebpackPlugin.files.manifest %>"<% } %>> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="ie9" <% if(htmlWebpackPlugin.files.manifest) { %> manifest="<%= htmlWebpackPlugin.files.manifest %>"<% } %>> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="" <% if(htmlWebpackPlugin.files.manifest) { %> manifest="<%= htmlWebpackPlugin.files.manifest %>"<% } %>> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title><%= htmlWebpackPlugin.options.title || 'Webpack App'%></title>
+
+  <% if (htmlWebpackPlugin.files.favicon) { %>
+  <link rel="shortcut icon" href="<%= htmlWebpackPlugin.files.favicon%>">
+  <% } %>
+
+  <% for (var css in htmlWebpackPlugin.files.css) { %>
+  <link href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
+  <% } %>
+</head>
+<body>
+    <div id="app-container"></div>
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+    <script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+    <% } %>
+</body>
+</html>

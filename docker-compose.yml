@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  db:
+  web:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.dev
+    command: bash -c "npm run hmr"
+    volumes:
+      - .:/code
+      - node_modules:/code/node_modules
+    ports:
+      - "8080:8080"
+
+volumes:
+  node_modules:

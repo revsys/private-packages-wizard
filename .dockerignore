@@ -1,0 +1,17 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+.vim
+.env_
+
+docker
+.git*
+db.sqlite3
+node_modules
+frontend/bundles
+./webpack-stats.json
+

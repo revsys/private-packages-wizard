@@ -1,0 +1,78 @@
+{
+  "name": "private-projects-wizard",
+  "version": "1.0.0",
+  "description": "A form wizard to help you include private python packages in your projects.",
+  "main": "webpack.config.js",
+  "scripts": {
+    "compile": "if [ \"$NODE_ENV\" = \"production\" ]; then\n\twebpack -p\nelse\n\twebpack -d\nfi",
+    "rebuild": "docker-compose rm -f -s web && docker-compose build --force-rm web",
+    "hmr": "webpack-dev-server --config webpack.config.hmr.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/revsys/private-packages-wizard.git"
+  },
+  "author": "RevSys",
+  "license": "BSD-3-Clause",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/revsys/private-packages-wizard/issues"
+  },
+  "homepage": "https://github.com/revsys/private-packages-wizard#README",
+  "dependencies": {
+    "autoprefixer": "^7.1.6",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "bootstrap": "^4.0.0-beta.2",
+    "classnames": "^2.2.5",
+    "css-loader": "^0.28.7",
+    "history": "^4.7.2",
+    "jquery": "^3.2.1",
+    "node-sass": "^4.5.3",
+    "path": "^0.12.7",
+    "popper.js": "^1.12.9",
+    "postcss-loader": "^2.0.8",
+    "precss": "^2.0.0",
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0",
+    "react-copy-to-clipboard": "^5.0.1",
+    "react-dom": "^16.0.0",
+    "react-github-fork-ribbon": "^0.5.1",
+    "react-hot-loader": "^3.1.3",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^5.0.0-alpha.8",
+    "reactstrap": "^5.0.0-alpha.3",
+    "redux": "^3.7.2",
+    "redux-actions": "^2.2.1",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-form": "^7.2.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
+    "webpack": "^3.8.1",
+    "webpack-bundle-tracker": "^0.2.0",
+    "webpack-dev-server": "^2.9.5"
+  },
+  "optionalDependencies": {
+    "fsevents": "1.1.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.0.3",
+    "eslint": "^4.12.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.5.1",
+    "express": "^4.16.2",
+    "html-webpack-plugin": "^2.30.1"
+  }
+}

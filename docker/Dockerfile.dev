@@ -1,0 +1,23 @@
+FROM revolutionsystems/python:3.6.3-wee-optimized-lto
+
+EXPOSE 8080
+
+LABEL Description="Image for Private Packages Wizard" Vendor="RevSys" Version="0.0.1"
+
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONOPTIMIZE TRUE
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN apt-get -y install nodejs \
+    && apt-get -y install yarn \
+    && rm -rf $HOME/.cache /var/lib/apt/lists/* /usr/share/man /usr/local/share/man
+
+ADD . /code/
+
+WORKDIR /code
+
+RUN yarn install
+
+CMD npm run hrm
