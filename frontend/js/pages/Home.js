@@ -30,6 +30,7 @@ const Home = () => (
     cut-n-paste your repository URL and we'll generate the correct URL for you.
     </p>
     <p>You may leave the Access Token empty if you are super concerned about security and it will be filled with XXXs which you can manually replace.  Any token entered is not transmitted anywhere, but we understand  and congratulate your paranoia.</p>
+    <p>You can read our post on <a href="/tidbits/using-private-packages-python/">Using Private Packages in Python</a> to find out more on how this all works.</p>
     <p>* indicates required fields</p>
     </div>
     <WizardFormContainer />
