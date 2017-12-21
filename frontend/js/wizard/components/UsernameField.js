@@ -20,10 +20,16 @@ const UsernameField = ({
     disabled = true;
   }
 
+  let placeholder_text = 'ci_bot or other username';
+
+  if(disabled == true) {
+    placeholder_text = 'Username not needed with ' + provider
+  }
+
   return (
     <div>
       <Label for="username">Username *</Label>
-      <Input disabled={disabled} type="text" name="username" id="username" placeholder="ci_bot" onChange={setUsername} />
+      <Input disabled={disabled} type="text" name="username" id="username" placeholder={placeholder_text} onChange={setUsername} />
     </div>
   );
 };

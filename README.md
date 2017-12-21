@@ -13,7 +13,7 @@ $ yarn install
 ### Local
 
 ```bash
-$ npm run hrm
+$ npm run hmr
 ```
 
 or

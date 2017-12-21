@@ -34,16 +34,18 @@ const WizardForm = (props) => {
           </Label>
         </FormGroup>
         <FormGroup>
-          <Label for="ref">ref *</Label>
-          <Field component={RenderInput} type="text" name="ref" id="ref" placeholder="v0.0.1" onChange={setRef} />
+          <Label for="ref">Repository ref *</Label>
+          <Field component={RenderInput} type="text" name="ref" id="ref" placeholder="branch or tag, for example 'master' or 'v1.0.0'" onChange={setRef} />
         </FormGroup>
         <FormGroup>
-          <Label for="repo">Repo URL *</Label>
-          <Field component={RenderInput} type="url" name="repo" id="repo" placeholder="http://github.com/python/cpython" onChange={parseRepo} />
+          <Label for="repo">Repository URL *</Label>
+          <Field component={RenderInput} type="url" name="repo" id="repo" placeholder="Repository URL such as http://github.com/python/cpython" onChange={parseRepo} />
         </FormGroup>
         <FormGroup>
           <UsernameFieldContainer />
-          <Label for="repo">Access Token</Label>
+        </FormGroup>
+        <FormGroup>
+          <Label for="repo">Optional Access Token</Label>
           <Field component={RenderInput} type="text" name="token" id="token" placeholder="XXXXXX" onChange={setToken} />
           <HelpTokenContainer />
         </FormGroup>

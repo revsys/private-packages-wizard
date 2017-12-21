@@ -10,8 +10,6 @@ const HelpToken = ({ tokenURL }) => {
   return (
     <div>
       <p>You can get a token at <a href={tokenURL} rel="nofollow" target="_blank">{ tokenURL }</a>.</p>
-      <p>* indicates required fields.</p>
-      <p>You may leave the Access Token empty if you are super concerned about security and it will be filled with XXXs which you can manually replace.  Any token entered is not transmitted anywhere, but we understand  and congratulate your paranoia.</p>
     </div>
   );
 };
