@@ -96,7 +96,9 @@ export const parseRepo = e => (
 export const computeUrl = () => (
   (dispatch, getState) => {
     const wizardState = getState().wizard;
-    const { installer, provider, org, teamProject, reference, username, token } = wizardState;
+    const {
+      installer, provider, org, teamProject, reference, username, token, project
+    } = wizardState;
 
     let url = null;
     if (reference !== null) {
@@ -108,10 +110,10 @@ export const computeUrl = () => (
             url = `${scheme}${sanitToken}@github.com${teamProject}/archive/${reference}.zip`;
             break;
           case 'GITLAB':
-            url = `${scheme}gitlab.com${teamProject}/repository/archive.zip?private_token=${sanitToken}&reference=${reference}`;
+            url = `${scheme}gitlab.com${teamProject}/-/archive/${reference}/${project}-${reference}.zip?private_token=${sanitToken}`;
             break;
           case 'GITHOST':
-            url = `${scheme}${org}.githost.io${teamProject}/repository/archive.zip?private_token=${sanitToken}&reference=${reference}`;
+            url = `${scheme}${org}.githost.io${teamProject}/-/archive/${reference}/${project}-${reference}.zip?private_token=${sanitToken}`;
             break;
           case 'BITBUCKET':
             url = `${scheme}${username}:${sanitToken}@bitbucket.org${teamProject}/get/${reference}.zip`;
