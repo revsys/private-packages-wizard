@@ -58,6 +58,7 @@ export const parseRepo = e => (
     let team = null;
     let project = null;
     let remainder = null;
+    let rest = null;
 
     try {
       const parser = new URL(repo);
