@@ -77,7 +77,7 @@ export const parseRepo = e => (
 
       [remainder, team, project] = pathname.split('/');
 
-      if (provider === 'githost') {
+      if (provider === 'GITHOST') {
         [org, ...rest] = hostname.split('.'); // eslint-disable-line no-undef
       }
 
