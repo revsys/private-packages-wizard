@@ -50,7 +50,7 @@ export const computeTokenUrl = provider => (
 export const parseRepo = e => (
   (dispatch) => {
     let repo = e.target.value;
-    repo = repo.replace(/\/$/, "")
+    repo = repo.replace(/\/$/, '');
 
     let provider = null;
     let org = null;
@@ -81,7 +81,6 @@ export const parseRepo = e => (
       if (provider === 'GITHOST') {
         [org, ...rest] = hostname.split('.'); // eslint-disable-line no-undef
       }
-
     } catch (e) {
       return;
     }
@@ -91,7 +90,6 @@ export const parseRepo = e => (
     dispatch(setTeamProject(teamProject));
     dispatch(setProject(project));
     dispatch(computeTokenUrl(provider));
-
   }
 );
 
