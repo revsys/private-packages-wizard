@@ -13,8 +13,10 @@ const WizardForm = (props) => {
   const {
     parseRepo,
     setInstaller,
-    setRef, setToken, setLibrary,
+    computeRef, setToken, setLibrary, setVersion,
+    isLibrary,
     computeUrl,
+    change,
   } = props;
 
   return (
@@ -27,15 +29,42 @@ const WizardForm = (props) => {
             <option value="pipenv">pipenv</option>
           </Input>
         </FormGroup>
-        <FormGroup check>
-          <Label for="isLibrary" check>
-            <Input type="checkbox" name="isLibrary" id="isLibrary" onChange={setLibrary} />{' '}
-            This is a library
-          </Label>
-        </FormGroup>
         <FormGroup>
           <Label for="ref">Repository ref *</Label>
-          <Field component={RenderInput} type="text" name="ref" id="ref" placeholder="branch or tag, for example 'master' or 'v1.0.0'" onChange={setRef} />
+          <Field
+            component={RenderInput}
+            type="text"
+            name="ref"
+            id="ref"
+            placeholder="branch or tag, for example 'master' or 'v1.0.0'"
+            onChange={e => computeRef(e, change)}
+          />
+        </FormGroup>
+        <FormGroup>
+          <FormGroup check>
+            <Label for="isLibrary">
+              <Field
+                component="input"
+                type="checkbox"
+                name="isLibrary"
+                id="isLibrary"
+                onChange={setLibrary}
+              />{' '}
+              This is a library
+            </Label>
+          </FormGroup>
+          <FormGroup>
+            <Label for="version">Version</Label>
+            <Field
+              component={RenderInput}
+              type="text"
+              name="version"
+              id="version"
+              placeholder="1.0.0"
+              disabled={!isLibrary}
+              onChange={e => setVersion(e.target.value)}
+            />
+          </FormGroup>
         </FormGroup>
         <FormGroup>
           <Label for="repo">Repository URL *</Label>
@@ -59,9 +88,16 @@ WizardForm.propTypes = {
   parseRepo: PropTypes.func.isRequired,
   setInstaller: PropTypes.func.isRequired,
   setToken: PropTypes.func.isRequired,
-  setRef: PropTypes.func.isRequired,
+  setVersion: PropTypes.func.isRequired,
+  computeRef: PropTypes.func.isRequired,
   setLibrary: PropTypes.func.isRequired,
   computeUrl: PropTypes.func.isRequired,
+  change: PropTypes.func.isRequired,
+  isLibrary: PropTypes.bool,
 };
 
-export default reduxForm({ form: 'loginForm' })(WizardForm);
+WizardForm.defaultProps = {
+  isLibrary: false,
+};
+
+export default reduxForm({ form: 'wizard' })(WizardForm);

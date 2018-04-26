@@ -8,6 +8,7 @@ class RenderInput extends React.PureComponent {
     const {
       input,
       placeholder,
+      disabled,
       type,
       meta: {
         touched,
@@ -25,6 +26,7 @@ class RenderInput extends React.PureComponent {
       <FormGroup color={classes}>
         <Input
           {...input}
+          disabled={disabled}
           type={type}
           placeholder={placeholder}
           valid={!error}
@@ -36,12 +38,9 @@ class RenderInput extends React.PureComponent {
   }
 }
 
-RenderInput.defaultProps = {
-  autofocus: false,
-};
-
 RenderInput.propTypes = {
   input: PropTypes.object,
+  disabled: PropTypes.bool,
   placeholder: PropTypes.string,
   type: PropTypes.string.isRequired,
   meta: PropTypes.shape({
@@ -52,6 +51,8 @@ RenderInput.propTypes = {
 };
 
 RenderInput.defaultProps = {
+  autofocus: false,
+  disabled: false,
   placeholder: '',
   meta: {}
 };
