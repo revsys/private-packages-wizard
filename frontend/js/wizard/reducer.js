@@ -8,6 +8,7 @@ import {
   SET_ORG,
   SET_TEAMPROJECT,
   SET_REF,
+  SET_VERSION,
   SET_PROJECT,
   SET_LIBRARY,
   SET_REQ_URL,
@@ -26,6 +27,7 @@ const initialState = {
   reference: null,
   isLibrary: false,
   reqUrl: null,
+  version: null,
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -78,7 +80,12 @@ const mainReducer = (state = initialState, action) => {
     case SET_REF:
       return {
         ...state,
-        reference: action.payload.target.value,
+        reference: action.payload,
+      };
+    case SET_VERSION:
+      return {
+        ...state,
+        version: action.payload,
       };
     case SET_LIBRARY:
       return {

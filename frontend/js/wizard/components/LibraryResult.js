@@ -7,14 +7,14 @@ import CopyBtn from './CopyBtn';
 
 
 const LibraryResult = ({
-  project, reference, reqUrl, isLibrary,
+  project, reqUrl, isLibrary, version,
 }) => {
   if (isLibrary !== true) {
     return null;
   }
 
-  const requires = `'${project}==${reference}',`;
-  const depLink = `'${reqUrl}#egg=${project}-${reference}',`;
+  const requires = `'${project}==${version}',`;
+  const depLink = `'${reqUrl}#egg=${project}-${version}',`;
   return (
     <div className="alert alert-warning">
       <Label>
@@ -43,14 +43,13 @@ const LibraryResult = ({
 LibraryResult.propTypes = {
   reqUrl: PropTypes.string,
   project: PropTypes.string,
-  reference: PropTypes.string,
+  version: PropTypes.string,
   isLibrary: PropTypes.bool,
 };
 
 LibraryResult.defaultProps = {
   reqUrl: null,
   project: null,
-  reference: null,
   isLibrary: null,
 };
 
