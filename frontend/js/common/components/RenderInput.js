@@ -47,7 +47,6 @@ RenderInput.propTypes = {
     touched: PropTypes.bool,
     error: PropTypes.any,
   }),
-  value: PropTypes.string,
   autofocus: PropTypes.bool,
 };
 

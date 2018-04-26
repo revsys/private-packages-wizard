@@ -1,5 +1,4 @@
 import { createAction } from 'redux-actions';
-import { change as reduxChange } from 'redux-form';
 
 export const SET_INSTALLER = 'SET_INSTALLER';
 export const SET_USERNAME = 'SET_USERNAME';

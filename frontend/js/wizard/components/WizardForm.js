@@ -100,4 +100,4 @@ WizardForm.defaultProps = {
   isLibrary: false,
 };
 
-export default reduxForm({ form: 'wizard', enableReinitialize: true })(WizardForm);
+export default reduxForm({ form: 'wizard' })(WizardForm);
