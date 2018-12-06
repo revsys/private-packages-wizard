@@ -1,15 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import HelpTokenDefault from './HelpTokenDefault';
+import HelpTokenGitlab from './HelpTokenGitlab';
 
-const HelpToken = ({ tokenURL }) => {
+
+const HelpToken = ({ tokenURL, provider }) => {
   if (tokenURL === null) {
     return null;
   }
 
+  let HelpText = HelpTokenDefault;
+  if (provider === 'GITLAB' || provider === 'GITHOST') {
+    // noinspection JSUnusedAssignment
+    HelpText = HelpTokenGitlab;
+  }
+
   return (
     <div>
-      <p>You can get a token at <a href={tokenURL} rel="nofollow" target="_blank">{ tokenURL }</a>.</p>
+      <HelpText tokenURL={tokenURL} />
     </div>
   );
 };
@@ -17,10 +26,12 @@ const HelpToken = ({ tokenURL }) => {
 
 HelpToken.propTypes = {
   tokenURL: PropTypes.string,
+  provider: PropTypes.string,
 };
 
 HelpToken.defaultProps = {
   tokenURL: null,
+  provider: null,
 };
 
 export default HelpToken;

@@ -1,35 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Field } from 'redux-form';
-import { Label, Input } from 'reactstrap';
+import includes from 'lodash/includes';
 
-import RenderInput from '../../common/components/RenderInput';
+import { Label, Input } from 'reactstrap';
 
 
 const UsernameField = ({
   provider, installer,
   setUsername,
 }) => {
-  let disabled = false;
-  if (provider === 'GITHUB') {
-    disabled = true;
-  }
+  const disabled = includes(['GITHUB'], provider);
+  let placeholderText = 'ci_bot or other username';
 
-  if (installer === 'pip' && provider !== 'BITBUCKET' && provider !== null) {
-    disabled = true;
-  }
-
-  let placeholder_text = 'ci_bot or other username';
-
-  if(disabled == true) {
-    placeholder_text = 'Username not needed with ' + provider
+  if (disabled === true) {
+    placeholderText = `Username not needed with ${provider}`;
   }
 
   return (
     <div>
       <Label for="username">Username *</Label>
-      <Input disabled={disabled} type="text" name="username" id="username" placeholder={placeholder_text} onChange={setUsername} />
+      <Input disabled={disabled} type="text" name="username" id="username" placeholder={placeholderText} onChange={setUsername} />
     </div>
   );
 };

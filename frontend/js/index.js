@@ -1,10 +1,10 @@
 /* global window, document, PRODUCTION */
 
-import 'bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import '../scss/custom.scss'
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../scss/custom.scss';
 
-import React from 'react'
+import React from 'react';
 import { AppContainer } from 'react-hot-loader';
 
 import ReactDOM from 'react-dom';
@@ -23,21 +23,21 @@ import routes from './routes';
 import reducers from './reducers';
 import RootContainer from './containers/RootContainer';
 
-const history = createHistory()
-const logger = createLogger()
+const history = createHistory();
+const logger = createLogger();
 
 const middleware = [
   thunk,
   routerMiddleware(history),
   logger,
-]
+];
 
 const store = createStore(
   reducers,
   composeWithDevTools(
-      applyMiddleware(...middleware)
+    applyMiddleware(...middleware)
   )
-)
+);
 
 const render = (Component) => {
   ReactDOM.render(

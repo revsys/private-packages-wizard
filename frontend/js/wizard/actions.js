@@ -47,7 +47,7 @@ export const computeRef = (e, change) => (
   }
 );
 
-export const computeTokenUrl = provider => (
+export const computeTokenUrl = (provider, teamProject, org = null) => (
   (dispatch) => {
     let tokenUrl;
 
@@ -56,7 +56,10 @@ export const computeTokenUrl = provider => (
         tokenUrl = 'https://github.com/settings/tokens';
         break;
       case 'GITLAB':
-        tokenUrl = 'https://gitlab.com/profile/personal_access_tokens';
+        tokenUrl = `https://gitlab.com/${teamProject}settings/repository`;
+        break;
+      case 'GITHOST':
+        tokenUrl = `https://${org}.githost.io/${teamProject}settings/repository`;
         break;
       default:
         tokenUrl = null;
@@ -99,7 +102,7 @@ export const parseRepo = e => (
       if (provider === 'GITHOST') {
         [org, ...rest] = hostname.split('.'); // eslint-disable-line no-undef
       }
-    } catch (e) {
+    } catch (err) {
       return;
     }
 
@@ -107,7 +110,7 @@ export const parseRepo = e => (
     dispatch(setOrg(org));
     dispatch(setTeamProject(teamProject));
     dispatch(setProject(project));
-    dispatch(computeTokenUrl(provider));
+    dispatch(computeTokenUrl(provider, teamProject, org));
   }
 );
 
@@ -115,47 +118,31 @@ export const computeUrl = () => (
   (dispatch, getState) => {
     const wizardState = getState().wizard;
     const {
-      installer, provider, org, teamProject, reference, username, token,
+      provider, org, teamProject, reference, username, token,
     } = wizardState;
 
     let url = null;
     if (reference !== null) {
-      const sanitToken = token === null ? 'XXXXXX' : token;
-      const scheme = installer === 'pipenv' ? 'git+https://' : 'https://';
-      if (installer === 'pip') {
-        switch (provider) {
-          case 'GITHUB':
-            url = `${scheme}${sanitToken}@github.com/${teamProject}/archive/${reference}.zip`;
-            break;
-          case 'GITLAB':
-            url = `${scheme}gitlab.com/api/v4/projects/${encodeURIComponent(teamProject)}/repository/archive?sha=${reference}&private_token=${sanitToken}`;
-            break;
-          case 'GITHOST':
-            url = `${scheme}${org}.githost.io/api/v4/projects/${encodeURIComponent(teamProject)}/repository/archive?sha=${reference}&private_token=${sanitToken}`;
-            break;
-          case 'BITBUCKET':
-            url = `${scheme}${username}:${sanitToken}@bitbucket.org${teamProject}/get/${reference}.zip`;
-            break;
-          default:
-            url = null;
-        }
-      } else if (installer === 'pipenv') {
-        switch (provider) {
-          case 'GITHUB':
-            url = `${scheme}${sanitToken}@github.com${teamProject}.git@${reference}`;
-            break;
-          case 'GITLAB':
-            url = `${scheme}${username}:${sanitToken}@gitlab.com${teamProject}.git@${reference}`;
-            break;
-          case 'GITHOST':
-            url = `${scheme}${username}:${sanitToken}@${org}.githost.io${teamProject}.git@${reference}`;
-            break;
-          case 'BITBUCKET':
-            url = `${scheme}${username}:${sanitToken}@bitbucket.org${teamProject}.git@${reference}`;
-            break;
-          default:
-            url = null;
-        }
+      const sanitUsername = username === null ? '{USERNAME}' : username;
+      const sanitToken = token === null ? '{TOKEN}' : token;
+      let scheme = 'git+https://';
+      switch (provider) {
+        case 'GITHUB':
+          scheme = 'https://';
+          url = `${scheme}${sanitToken}@github.com/${teamProject}/archive/${reference}.zip`;
+          break;
+        case 'GITLAB':
+          url = `${scheme}${sanitUsername}:${sanitToken}@gitlab.com${teamProject}.git@${reference}`;
+          break;
+        case 'GITHOST':
+          url = `${scheme}${sanitUsername}:${sanitToken}@${org}.githost.io${teamProject}.git@${reference}`;
+          break;
+        case 'BITBUCKET':
+          scheme = 'https://';
+          url = `${scheme}${sanitUsername}:${sanitToken}@bitbucket.org${teamProject}/get/${reference}.zip`;
+          break;
+        default:
+          url = null;
       }
     }
 
