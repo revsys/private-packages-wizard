@@ -2,7 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleTracker = require('webpack-bundle-tracker');
-const p = require('babel-plugin-transform-class-properties');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+
+const p = require('@babel/plugin-proposal-class-properties');
 
 const config = {
   context: __dirname,
@@ -26,8 +28,8 @@ const config = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['env', 'react', 'stage-2'],
-          plugins: [p],
+          presets: ['@babel/preset-env', '@babel/preset-react'],
+          plugins: ['lodash', p],
         }
       },
       {
@@ -62,6 +64,7 @@ const config = {
     ]
   },
   plugins: [
+    new LodashModuleReplacementPlugin,
     new BundleTracker({ filename: './webpack-stats.json' }),
     new HtmlWebpackPlugin({
       title: 'Private Packages Wizard',
@@ -72,21 +75,15 @@ const config = {
 };
 
 if (process.env.NODE_ENV === 'production') {
+  config.mode = 'production';
   config.output.filename = '[name]-[hash].js';
   config.plugins = [
+    new LodashModuleReplacementPlugin,
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
       Popper: ['popper.js', 'default'],
-    }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"',
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-      }
     }),
     new BundleTracker({ filename: './webpack-stats.json' }),
     new HtmlWebpackPlugin({
@@ -96,18 +93,17 @@ if (process.env.NODE_ENV === 'production') {
     })
   ];
 } else {
+  config.mode = 'development';
   config.output.filename = '[name].bundle.js';
   config.devtool = 'cheap-eval-inline-source-map';
   // config.devtool = 'source-map';
   config.plugins = [
+    new LodashModuleReplacementPlugin,
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
       Popper: ['popper.js', 'default'],
-    }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"development"',
     }),
     new BundleTracker({ filename: './webpack-stats.json' }),
     new HtmlWebpackPlugin({
