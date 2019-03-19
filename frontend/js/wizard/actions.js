@@ -1,3 +1,4 @@
+import path from 'path';
 import { createAction } from 'redux-actions';
 
 export const SET_INSTALLER = 'SET_INSTALLER';
@@ -56,10 +57,10 @@ export const computeTokenUrl = (provider, teamProject, org = null) => (
         tokenUrl = 'https://github.com/settings/tokens';
         break;
       case 'GITLAB':
-        tokenUrl = `https://gitlab.com/${teamProject}settings/repository`;
+        tokenUrl = `https://gitlab.com/${teamProject}/settings/repository`;
         break;
       case 'GITHOST':
-        tokenUrl = `https://${org}.githost.io/${teamProject}settings/repository`;
+        tokenUrl = `https://${org}.githost.io/${teamProject}/settings/repository`;
         break;
       default:
         tokenUrl = null;
@@ -129,17 +130,17 @@ export const computeUrl = () => (
       switch (provider) {
         case 'GITHUB':
           scheme = 'https://';
-          url = `${scheme}${sanitToken}@github.com/${teamProject}/archive/${reference}.zip`;
+          url = path.join(`${scheme}${sanitToken}@github.com`, teamProject, 'archive', `${reference}.zip`);
           break;
         case 'GITLAB':
-          url = `${scheme}${sanitUsername}:${sanitToken}@gitlab.com${teamProject}.git@${reference}`;
+          url = path.join(`${scheme}${sanitUsername}:${sanitToken}@gitlab.com`, `${teamProject}.git@${reference}`);
           break;
         case 'GITHOST':
-          url = `${scheme}${sanitUsername}:${sanitToken}@${org}.githost.io${teamProject}.git@${reference}`;
+          url = path.join(`${scheme}${sanitUsername}:${sanitToken}@${org}.githost.io`, `${teamProject}.git@${reference}`);
           break;
         case 'BITBUCKET':
           scheme = 'https://';
-          url = `${scheme}${sanitUsername}:${sanitToken}@bitbucket.org${teamProject}/get/${reference}.zip`;
+          url = path.join(`${scheme}${sanitUsername}:${sanitToken}@bitbucket.org`, teamProject, 'get', `${reference}.zip`);
           break;
         default:
           url = null;
