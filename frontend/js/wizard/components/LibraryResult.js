@@ -13,8 +13,9 @@ const LibraryResult = ({
     return null;
   }
 
-  const requires = `'${project}==${version}',`;
-  const depLink = `'${reqUrl}#egg=${project}-${version}',`;
+
+  const requires = version ? `'${project}==${version}',` : `'${project}'`;
+  const depLink = version ? `'${reqUrl}#egg=${project}-${version}',` : `'${reqUrl}#egg=${project}`;
   return (
     <div className="alert alert-warning">
       <Label>
