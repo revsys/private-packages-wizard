@@ -127,26 +127,30 @@ export const computeUrl = () => (
       const sanitUsername = username === null ? '{USERNAME}' : username;
       const sanitToken = token === null ? '{TOKEN}' : token;
       let scheme = 'git+https://';
+      let urlPath = '';
       switch (provider) {
         case 'GITHUB':
           scheme = 'https://';
-          url = path.join(`${scheme}${sanitToken}@github.com`, teamProject, 'archive', `${reference}.zip`);
+          urlPath = path.join(teamProject, 'archive', `${reference}.zip`);
+          url = `${scheme}${sanitToken}@github.com/${urlPath}`;
           break;
         case 'GITLAB':
-          url = path.join(`${scheme}${sanitUsername}:${sanitToken}@gitlab.com`, `${teamProject}.git@${reference}`);
+          urlPath = `${teamProject}.git@${reference}`;
+          url = `${scheme}${sanitUsername}:${sanitToken}@gitlab.com$/{urlPath}`;
           break;
         case 'GITHOST':
-          url = path.join(`${scheme}${sanitUsername}:${sanitToken}@${org}.githost.io`, `${teamProject}.git@${reference}`);
+          urlPath = `${teamProject}.git@${reference}`;
+          url = `${scheme}${sanitUsername}:${sanitToken}@${org}.githost.io/${urlPath}`;
           break;
         case 'BITBUCKET':
           scheme = 'https://';
-          url = path.join(`${scheme}${sanitUsername}:${sanitToken}@bitbucket.org`, teamProject, 'get', `${reference}.zip`);
+          urlPath = path.join(teamProject, 'get', `${reference}.zip`);
+          url = `${scheme}${sanitUsername}:${sanitToken}@bitbucket.org/${urlPath}`;
           break;
         default:
           url = null;
       }
     }
-
     dispatch(setReqUrl(url));
   }
 );

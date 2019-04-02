@@ -7,15 +7,14 @@ import CopyBtn from './CopyBtn';
 
 
 const LibraryResult = ({
-  project, reqUrl, isLibrary, version,
+  project, reqUrl, isLibrary,
 }) => {
   if (isLibrary !== true) {
     return null;
   }
 
 
-  const requires = version ? `'${project}==${version}',` : `'${project}'`;
-  const depLink = version ? `'${reqUrl}#egg=${project}-${version}',` : `'${reqUrl}#egg=${project}`;
+  const requires = `'${project}@${reqUrl}'`;
   return (
     <div className="alert alert-warning">
       <Label>
@@ -27,16 +26,6 @@ const LibraryResult = ({
           <InputGroupAddon><CopyBtn /></InputGroupAddon>
         </CopyToClipboard>
       </InputGroup>
-      <hr />
-      <Label>
-        and this in your <code>dependency_links</code>:
-      </Label>
-      <InputGroup>
-        <Input value={depLink} disabled name="depLink" />
-        <CopyToClipboard text={depLink}>
-          <InputGroupAddon><CopyBtn /></InputGroupAddon>
-        </CopyToClipboard>
-      </InputGroup>
     </div>
   );
 };
@@ -44,7 +33,6 @@ const LibraryResult = ({
 LibraryResult.propTypes = {
   reqUrl: PropTypes.string,
   project: PropTypes.string,
-  version: PropTypes.string,
   isLibrary: PropTypes.bool,
 };
 

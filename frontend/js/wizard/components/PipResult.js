@@ -6,22 +6,19 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import CopyBtn from './CopyBtn';
 
-const PipResult = ({ installer, reqUrl, isLibrary }) => {
+const PipResult = ({ installer, reqUrl }) => {
   if (installer !== 'pip') {
     return null;
   }
 
-  let command = `pip install "${reqUrl}"`;
-  if (isLibrary === true) {
-    command = `${command} --process-dependency-links`;
-  }
+  const command = `pip install "${reqUrl}"`;
   return (
     <div className="alert alert-success">
       <Label for="reqUrl">Add this to your requirements file:</Label>
       <InputGroup>
         <Input value={reqUrl} disabled name="reqUrl" />
         <CopyToClipboard text={reqUrl}>
-          <InputGroupAddon><CopyBtn /></InputGroupAddon>
+          <InputGroupAddon style={{ cursor: 'pointer' }} ><CopyBtn /></InputGroupAddon>
         </CopyToClipboard>
       </InputGroup>
       <hr />
@@ -39,13 +36,11 @@ const PipResult = ({ installer, reqUrl, isLibrary }) => {
 PipResult.propTypes = {
   reqUrl: PropTypes.string,
   installer: PropTypes.string,
-  isLibrary: PropTypes.bool,
 };
 
 PipResult.defaultProps = {
   reqUrl: null,
   installer: null,
-  isLibrary: null,
 };
 
 export default PipResult;
