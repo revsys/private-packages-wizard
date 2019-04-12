@@ -68,7 +68,7 @@ const WizardForm = (props) => {
         </FormGroup>
         <FormGroup>
           <Label for="repo">Repository URL *</Label>
-          <Field component={RenderInput} type="url" name="repo" id="repo" placeholder="Repository URL such as http://github.com/python/cpython" onChange={parseRepo} />
+          <Field component={RenderInput} type="url" name="repo" id="repo" placeholder="Repository URL such as https://github.com/python/cpython" onChange={parseRepo} />
         </FormGroup>
         <FormGroup>
           <UsernameFieldContainer />
