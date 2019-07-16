@@ -40,7 +40,7 @@
     "classnames": "^2.2.5",
     "css-loader": "^0.28.7",
     "history": "^4.7.2",
-    "jquery": "^3.2.1",
+    "jquery": "^3.4.0",
     "lodash": "^4.17.13",
     "lodash-webpack-plugin": "^0.11.5",
     "node-sass": "^4.5.3",
