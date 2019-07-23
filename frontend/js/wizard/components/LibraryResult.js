@@ -18,7 +18,7 @@ const LibraryResult = ({
   return (
     <div className="alert alert-warning">
       <Label>
-        When requiring this library in <code>setup.py</code>, use this in your <code>install_requires</code>:
+        When requiring this library in a <code>setup.py</code>, use this in your <code>install_requires</code>:
       </Label>
       <InputGroup>
         <Input value={requires} disabled name="requires" />
