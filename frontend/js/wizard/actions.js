@@ -132,7 +132,7 @@ export const computeUrl = () => (
         case 'GITHUB':
           scheme = 'https://';
           urlPath = path.join(teamProject, 'archive', `${reference}.zip`);
-          url = `${scheme}${sanitToken}@github.com/${urlPath}`;
+          url = `${scheme}${sanitToken}:@github.com/${urlPath}`;
           break;
         case 'GITLAB':
           urlPath = `${teamProject}.git@${reference}`;
