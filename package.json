@@ -41,7 +41,7 @@
     "css-loader": "^3.1.0",
     "history": "^4.7.2",
     "jquery": "^3.5.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "lodash-webpack-plugin": "^0.11.5",
     "node-sass": "^4.5.3",
     "path": "^0.12.7",
